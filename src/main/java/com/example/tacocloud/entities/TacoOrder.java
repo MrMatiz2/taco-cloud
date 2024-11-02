@@ -5,16 +5,21 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
+@Table // Se puede especificar el nombre de la tabla, por defecto se toma el nombre de la clase
 public class TacoOrder {
 
+    @Id
     private Long id;
 
+    // @Column() - Se puede cambiar el nombre de la columna, por defecto se toma el nombre del campo
     private Date placedAt;
 
     @NotBlank(message = "Delivery name is required")
