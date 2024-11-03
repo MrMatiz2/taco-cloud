@@ -20,7 +20,7 @@ public class TacoOrder {
     private Long id;
 
     // @Column() - Se puede cambiar el nombre de la columna, por defecto se toma el nombre del campo
-    private Date placedAt;
+    private Date placedAt = new Date();
 
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;
