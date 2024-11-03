@@ -7,4 +7,4 @@ docker run --name my-cassandra `
  -d cassandra:latest
 
 docker run -it --network cassandra-net --rm cassandra cqlsh my-cassandra
-create keyspace tacocloud with replication={'clas s':'SimpleStrategy', 'replication_factor':1} and durable_writes=true;
+create keyspace tacocloud with replication={'class':'SimpleStrategy', 'replication_factor':1} and durable_writes=true;
