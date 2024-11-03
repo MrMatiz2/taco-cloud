@@ -1,6 +1,10 @@
 package com.example.tacocloud.controllers;
 
+import com.example.tacocloud.entities.Ingredient;
+import com.example.tacocloud.entities.IngredientRef;
+import com.example.tacocloud.entities.Taco;
 import com.example.tacocloud.entities.TacoOrder;
+import com.example.tacocloud.repositories.IngredientRefRepository;
 import com.example.tacocloud.repositories.OrderRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +21,11 @@ import org.springframework.web.bind.support.SessionStatus;
 public class OrderController {
 
     private OrderRepository orderRepository;
+    private IngredientRefRepository ingredientRefRepository;
 
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(OrderRepository orderRepository, IngredientRefRepository ingredientRefRepository) {
         this.orderRepository = orderRepository;
+        this.ingredientRefRepository = ingredientRefRepository;
     }
 
     @GetMapping("/current")
@@ -34,7 +40,18 @@ public class OrderController {
             return "orderForm";
         }
         log.info("Order submitted: {}", tacoOrder);
-        orderRepository.save(tacoOrder);
+        tacoOrder = orderRepository.save(tacoOrder);
+
+        for (Taco taco : tacoOrder.getTacos()) {
+
+            for (Ingredient ingredient : taco.getIngredients()) {
+                IngredientRef ingredientRef = new IngredientRef();
+                ingredientRef.setIngredient(ingredient.getId());
+                ingredientRef.setTaco(taco.getId());
+                ingredientRefRepository.save(ingredientRef);
+            }
+        }
+
         sessionStatus.setComplete();
         return "redirect:/";
     }

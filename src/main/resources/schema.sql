@@ -17,13 +17,16 @@ CREATE TABLE IF NOT EXISTS taco
     id             IDENTITY,
     name           VARCHAR(50) NOT NULL,
     taco_order     BIGINT NOT NULL,
-    created_at     TIMESTAMP NOT NULL
+    created_at     TIMESTAMP NOT NULL,
+    taco_order_key BIGINT -- Estos campos los está tomando el CrudRepository, no entiendo por qué, los dejo para evitar errores
     );
 
 CREATE TABLE IF NOT EXISTS ingredient_ref
 (
+    id             IDENTITY,
     ingredient VARCHAR(4) NOT NULL,
-    taco       BIGINT NOT NULL
+    taco       BIGINT NOT NULL,
+    taco_key BIGINT  -- Estos campos los está tomando el CrudRepository, no entiendo por qué, los dejo para evitar errores
     );
 
 CREATE TABLE IF NOT EXISTS ingredient
