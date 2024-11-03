@@ -10,7 +10,7 @@ public class IngredientByIdConverter implements Converter<String, Ingredient> {
 
     // private Map<String, Ingredient> ingredientMap = new HashMap<>();
 
-    private IngredientRepository ingredientRepository;
+    private final IngredientRepository ingredientRepository;
 
     public IngredientByIdConverter(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;

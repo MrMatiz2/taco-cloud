@@ -5,6 +5,7 @@ import com.example.tacocloud.entities.Ingredient.*;
 import com.example.tacocloud.entities.Taco;
 import com.example.tacocloud.entities.TacoOrder;
 import com.example.tacocloud.repositories.IngredientRepository;
+import com.example.tacocloud.utils.TacoUDRUtils;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -72,7 +73,7 @@ public class DesignTacoController {
         if (errors.hasErrors()){
             return "design";
         }
-        tacoOrder.addTaco(taco);
+        tacoOrder.addTaco(TacoUDRUtils.toTacoUDT(taco));
         log.info("Processing taco: {}", taco.toString());
         return "redirect:/orders/current";
     }

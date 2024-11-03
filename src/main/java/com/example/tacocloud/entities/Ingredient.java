@@ -1,16 +1,16 @@
 package com.example.tacocloud.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.*;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
 @Data
-@Entity
+@Table("ingredients")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Ingredient {
 
-    @Id
+    @PrimaryKey
     private String id;
 
     private String name;
