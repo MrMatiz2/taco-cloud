@@ -1,9 +1,14 @@
 package com.example.tacocloud.repositories;
 
 import com.example.tacocloud.entities.TacoOrder;
+import org.springframework.data.repository.CrudRepository;
 
-public interface OrderRepository {
+import java.util.Date;
+import java.util.List;
 
-    TacoOrder save(TacoOrder order);
+public interface OrderRepository extends CrudRepository<TacoOrder, Long> {
+
+    List<TacoOrder> findByDeliveryZip(String zip);
+    List<TacoOrder> readTacoOrderByDeliveryZipAndPlacedAtBetween(String zip, Date startDate, Date endDate);
 
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.support.SessionStatus;
 @SessionAttributes("tacoOrder")
 public class OrderController {
 
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
     public OrderController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
@@ -35,6 +35,7 @@ public class OrderController {
         }
         log.info("Order submitted: {}", tacoOrder);
         orderRepository.save(tacoOrder);
+
         sessionStatus.setComplete();
         return "redirect:/";
     }
