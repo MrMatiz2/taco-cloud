@@ -37,7 +37,9 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/design", true)
-                )
+                ).csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/api/*")
+                )// TODO Debería ser resuelto más adelante cuando se protegan las API con autenticación
                 .build();
     }
 
