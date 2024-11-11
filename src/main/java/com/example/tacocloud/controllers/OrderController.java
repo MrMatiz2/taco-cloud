@@ -1,10 +1,13 @@
 package com.example.tacocloud.controllers;
 
+import com.example.tacocloud.configuration.OrderProps;
 import com.example.tacocloud.entities.TacoOrder;
 import com.example.tacocloud.entities.Users;
 import com.example.tacocloud.repositories.OrderRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +22,11 @@ import org.springframework.web.bind.support.SessionStatus;
 public class OrderController {
 
     private final OrderRepository orderRepository;
+    private final OrderProps orderProps;
 
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(OrderRepository orderRepository, OrderProps orderProps) {
         this.orderRepository = orderRepository;
+        this.orderProps = orderProps;
     }
 
     @GetMapping("/current")
@@ -33,6 +38,13 @@ public class OrderController {
         tacoOrder.setDeliveryZip(user.getZip());
         model.addAttribute("tacoOrder", tacoOrder);
         return "orderForm";
+    }
+
+    @GetMapping
+    public String orders(Model model, @AuthenticationPrincipal Users user) {
+        Pageable pageable = PageRequest.of(0, orderProps.getPageSize());
+        model.addAttribute("orders", orderRepository.findByUserOrderByPlacedAtDesc(user, pageable));
+        return "orders";
     }
 
     @PostMapping

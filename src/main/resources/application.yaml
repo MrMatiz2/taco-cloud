@@ -4,9 +4,24 @@ spring:
   datasource:
     generate-unique-name: false
     name: tacocloud
+taco:
+  orders:
+    pageSize: 5
+logging:
+  level:
+    tacocloud: DEBUG
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
     url: jdbc:mysql://localhost/tacocloud
     username: root
     password: root
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
+logging:
+  level:
+    tacocloud: WARN
