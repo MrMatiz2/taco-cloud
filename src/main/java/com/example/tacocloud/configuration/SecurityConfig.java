@@ -4,6 +4,8 @@ import com.example.tacocloud.entities.Users;
 import com.example.tacocloud.repositories.UsersRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -31,6 +33,8 @@ public class SecurityConfig {
                         //.requestMatchers("/design", "/orders").hasRole("USER")
                         //.requestMatchers("/", "/**").permitAll()
                         .requestMatchers("/design", "/orders").access(new WebExpressionAuthorizationManager("hasRole('USER')"))
+                        .requestMatchers(HttpMethod.POST, "/api/ingredients").hasAuthority("SCOPE_writeIngredients")
+                        .requestMatchers(HttpMethod.DELETE, "/api/ingredients").hasAuthority("SCOPE_deleteIngredients")
                         .requestMatchers("/", "/**").access(new WebExpressionAuthorizationManager("permitAll()"))
                         .anyRequest().authenticated()
                 )
@@ -39,7 +43,7 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/design", true)
                 ).csrf(csrf -> csrf
                         .ignoringRequestMatchers("/api/*")
-                )// TODO Debería ser resuelto más adelante cuando se protegan las API con autenticación
+                ).oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .build();
     }
 
