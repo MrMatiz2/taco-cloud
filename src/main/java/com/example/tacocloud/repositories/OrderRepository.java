@@ -1,7 +1,7 @@
 package com.example.tacocloud.repositories;
 
-import com.example.tacocloud.entities.TacoOrder;
-import com.example.tacocloud.entities.Users;
+import com.example.tacoclouddomain.entities.TacoOrder;
+import com.example.tacoclouddomain.entities.Users;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 

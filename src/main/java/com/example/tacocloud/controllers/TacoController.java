@@ -1,7 +1,7 @@
 package com.example.tacocloud.controllers;
 
-import com.example.tacocloud.entities.Taco;
 import com.example.tacocloud.repositories.TacoRepository;
+import com.example.tacoclouddomain.entities.Taco;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package com.example.tacocloud.controllers;
 
-import com.example.tacocloud.entities.TacoOrder;
 import com.example.tacocloud.repositories.OrderRepository;
+import com.example.tacoclouddomain.entities.TacoOrder;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

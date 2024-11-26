@@ -1,7 +1,7 @@
 package com.example.tacocloud.configuration;
 
-import com.example.tacocloud.entities.Users;
 import com.example.tacocloud.repositories.UsersRepository;
+import com.example.tacoclouddomain.entities.Users;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

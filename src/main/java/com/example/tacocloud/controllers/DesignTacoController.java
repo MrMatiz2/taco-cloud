@@ -1,10 +1,10 @@
 package com.example.tacocloud.controllers;
 
-import com.example.tacocloud.entities.Ingredient;
-import com.example.tacocloud.entities.Ingredient.*;
-import com.example.tacocloud.entities.Taco;
-import com.example.tacocloud.entities.TacoOrder;
 import com.example.tacocloud.repositories.IngredientRepository;
+import com.example.tacoclouddomain.entities.Ingredient;
+import com.example.tacoclouddomain.entities.Ingredient.*;
+import com.example.tacoclouddomain.entities.Taco;
+import com.example.tacoclouddomain.entities.TacoOrder;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

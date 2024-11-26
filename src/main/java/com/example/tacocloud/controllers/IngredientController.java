@@ -1,7 +1,7 @@
 package com.example.tacocloud.controllers;
 
-import com.example.tacocloud.entities.Ingredient;
 import com.example.tacocloud.repositories.IngredientRepository;
+import com.example.tacoclouddomain.entities.Ingredient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

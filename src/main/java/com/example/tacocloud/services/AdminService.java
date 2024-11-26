@@ -1,7 +1,7 @@
 package com.example.tacocloud.services;
 
-import com.example.tacocloud.entities.TacoOrder;
 import com.example.tacocloud.repositories.OrderRepository;
+import com.example.tacoclouddomain.entities.TacoOrder;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;

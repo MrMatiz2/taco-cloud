@@ -1,9 +1,9 @@
 package com.example.tacocloud.controllers;
 
 import com.example.tacocloud.configuration.OrderProps;
-import com.example.tacocloud.entities.TacoOrder;
-import com.example.tacocloud.entities.Users;
 import com.example.tacocloud.repositories.OrderRepository;
+import com.example.tacoclouddomain.entities.TacoOrder;
+import com.example.tacoclouddomain.entities.Users;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;

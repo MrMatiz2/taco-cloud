@@ -1,12 +1,12 @@
 package com.example.tacocloud.configuration;
 
-import com.example.tacocloud.entities.Ingredient;
-import com.example.tacocloud.entities.Ingredient.Type;
-import com.example.tacocloud.entities.Taco;
-import com.example.tacocloud.entities.Users;
 import com.example.tacocloud.repositories.IngredientRepository;
 import com.example.tacocloud.repositories.TacoRepository;
 import com.example.tacocloud.repositories.UsersRepository;
+import com.example.tacoclouddomain.entities.Ingredient;
+import com.example.tacoclouddomain.entities.Ingredient.Type;
+import com.example.tacoclouddomain.entities.Taco;
+import com.example.tacoclouddomain.entities.Users;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

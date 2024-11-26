@@ -1,6 +1,6 @@
 package com.example.tacocloud.repositories;
 
-import com.example.tacocloud.entities.Taco;
+import com.example.tacoclouddomain.entities.Taco;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
