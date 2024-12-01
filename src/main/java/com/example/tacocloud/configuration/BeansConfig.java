@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @ComponentScan(basePackages = {
-        "com.example.tacocloudmessagingjms.services"
+    "com.example.tacocloudmessagingjms.services"
 })
 public class BeansConfig {
 
