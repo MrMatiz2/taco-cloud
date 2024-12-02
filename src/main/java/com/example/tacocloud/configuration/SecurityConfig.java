@@ -42,7 +42,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .defaultSuccessUrl("/design", true)
                 ).csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/api/*")) // for testing purposes
+                        .ignoringRequestMatchers("/api/**")) // for testing purposes
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .build();
     }
