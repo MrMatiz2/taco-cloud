@@ -12,12 +12,23 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://localhost:9000/oauth2/jwks
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    template:
+      default-topic: tacocloud.orders.topic
+    consumer:
+      group-id: test-consumer-group
+    producer:
+      keySerializer: org.springframework.kafka.support.serializer.JsonSerializer
+      valueSerializer: org.springframework.kafka.support.serializer.JsonSerializer
 taco:
   orders:
     pageSize: 5
 logging:
   level:
     tacocloud: DEBUG
+
 ---
 spring:
   config:

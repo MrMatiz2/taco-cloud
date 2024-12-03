@@ -2,6 +2,7 @@ package com.example.tacocloud.controllers;
 
 import com.example.tacocloud.repositories.OrderRepository;
 import com.example.tacoclouddomain.entities.TacoOrder;
+import com.example.tacocloudkafka.services.KafkaOrderMessagingService;
 import com.example.tacocloudmessagingjms.services.receivers.JmsOrderReceiver;
 import com.example.tacocloudmessagingjms.services.JmsOrderMessagingService;
 import com.example.tacocloudmessagingrabbitmq.services.RabbitOrderMessagingService;
@@ -18,14 +19,17 @@ public class OrderApiController {
     private final JmsOrderReceiver jmsOrderReceiver;
     private final RabbitOrderMessagingService rabbitOrderMessagingService;
     private final RabbitOrderReceiver rabbitOrderReceiver;
+    private final KafkaOrderMessagingService kafkaOrderMessagingService;
 
     public OrderApiController(OrderRepository orderRepository, JmsOrderMessagingService jmsOrderMessagingService, JmsOrderReceiver jmsOrderReceiver,
-                              RabbitOrderMessagingService rabbitOrderMessagingService, RabbitOrderReceiver rabbitOrderReceiver) {
+                              RabbitOrderMessagingService rabbitOrderMessagingService, RabbitOrderReceiver rabbitOrderReceiver,
+                              KafkaOrderMessagingService kafkaOrderMessagingService) {
         this.orderRepository = orderRepository;
         this.jmsOrderMessagingService = jmsOrderMessagingService;
         this.jmsOrderReceiver = jmsOrderReceiver;
         this.rabbitOrderMessagingService = rabbitOrderMessagingService;
         this.rabbitOrderReceiver = rabbitOrderReceiver;
+        this.kafkaOrderMessagingService = kafkaOrderMessagingService;
     }
 
     @PostMapping(path = "/jms", consumes = "application/json")
@@ -45,9 +49,10 @@ public class OrderApiController {
         return orderRepository.save(order);
     }
 
-    @GetMapping("/rabbitmq")
-    public TacoOrder getMessageRabbitMq() {
-        return rabbitOrderReceiver.receiveOrder();
+    @PostMapping(path = "/kafka", consumes = "application/json")
+    public TacoOrder postOrderKafka(@RequestBody TacoOrder order) {
+        kafkaOrderMessagingService.sendOrder(order);
+        return orderRepository.save(order);
     }
 
 }
