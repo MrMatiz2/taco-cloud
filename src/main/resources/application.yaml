@@ -28,7 +28,15 @@ taco:
 logging:
   level:
     tacocloud: DEBUG
-
+tacocloud:
+  api:
+    url: http://localhost:8080/orders/fromEmail
+  email:
+    host:
+    mailbox:
+    password:
+    poll-rate:
+    username:
 ---
 spring:
   config:

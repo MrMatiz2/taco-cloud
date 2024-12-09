@@ -2,7 +2,7 @@ package com.example.tacocloud.controllers;
 
 import com.example.tacocloud.repositories.IngredientRepository;
 import com.example.tacoclouddomain.entities.Ingredient;
-import com.example.tacoclouddomain.entities.Ingredient.*;
+import com.example.tacoclouddomain.entities.Ingredient.Type;
 import com.example.tacoclouddomain.entities.Taco;
 import com.example.tacoclouddomain.entities.TacoOrder;
 import jakarta.validation.Valid;
@@ -53,12 +53,12 @@ public class DesignTacoController {
     }
 
     @ModelAttribute(name = "tacoOrder")
-    public TacoOrder order(){
+    public TacoOrder order() {
         return new TacoOrder();
     }
 
     @ModelAttribute(name = "taco")
-    public Taco taco(){
+    public Taco taco() {
         return new Taco();
     }
 
@@ -69,7 +69,7 @@ public class DesignTacoController {
 
     @PostMapping
     public String processTaco(@Valid Taco taco, Errors errors, @ModelAttribute TacoOrder tacoOrder) {
-        if (errors.hasErrors()){
+        if (errors.hasErrors()) {
             return "design";
         }
         tacoOrder.addTaco(taco);
@@ -77,7 +77,7 @@ public class DesignTacoController {
         return "redirect:/orders/current";
     }
 
-    private Iterable<Ingredient> filterByType(Iterable<Ingredient> ingredients, Type type){
+    private Iterable<Ingredient> filterByType(Iterable<Ingredient> ingredients, Type type) {
         return StreamSupport.stream(ingredients.spliterator(), false)
                 .filter(x -> x.getType().equals(type))
                 .collect(Collectors.toList());

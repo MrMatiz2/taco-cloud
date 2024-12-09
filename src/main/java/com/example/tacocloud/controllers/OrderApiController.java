@@ -1,17 +1,20 @@
 package com.example.tacocloud.controllers;
 
 import com.example.tacocloud.repositories.OrderRepository;
+import com.example.tacoclouddomain.email.EmailOrder;
 import com.example.tacoclouddomain.entities.TacoOrder;
 import com.example.tacocloudkafka.services.KafkaOrderMessagingService;
-import com.example.tacocloudmessagingjms.services.receivers.JmsOrderReceiver;
 import com.example.tacocloudmessagingjms.services.JmsOrderMessagingService;
+import com.example.tacocloudmessagingjms.services.receivers.JmsOrderReceiver;
 import com.example.tacocloudmessagingrabbitmq.services.RabbitOrderMessagingService;
 import com.example.tacocloudmessagingrabbitmq.services.receivers.RabbitOrderReceiver;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api/orders", produces = "application/json")
 @CrossOrigin(origins = "http://localhost:8080")
+@Slf4j
 public class OrderApiController {
 
     private final OrderRepository orderRepository;
@@ -53,6 +56,13 @@ public class OrderApiController {
     public TacoOrder postOrderKafka(@RequestBody TacoOrder order) {
         kafkaOrderMessagingService.sendOrder(order);
         return orderRepository.save(order);
+    }
+
+    @PostMapping(path = "/fromEmail", consumes = "application/json")
+    public EmailOrder postOrderKafka(@RequestBody EmailOrder order) {
+        //TODO Save incoming order in database
+        log.info(order.toString());
+        return order;
     }
 
 }
