@@ -7,6 +7,10 @@ import com.example.tacoclouddomain.entities.Ingredient;
 import com.example.tacoclouddomain.entities.Ingredient.Type;
 import com.example.tacoclouddomain.entities.Taco;
 import com.example.tacoclouddomain.entities.Users;
+import com.icegreen.greenmail.user.GreenMailUser;
+import com.icegreen.greenmail.util.GreenMail;
+import com.icegreen.greenmail.util.GreenMailUtil;
+import com.icegreen.greenmail.util.ServerSetupTest;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -70,6 +74,13 @@ public class DevelopmentConfig {
                     flourTortilla, cornTortilla, tomatoes,
                     lettuce, salsa));
             tacoRepo.save(taco3);
+
+            GreenMail greenMail = new GreenMail(ServerSetupTest.SMTP_IMAP);
+            greenMail.start();
+
+            GreenMailUser user = greenMail.setUser("to@localhost", "to", "password");
+            GreenMailUtil.sendTextEmailTest("to@localhost", "from@localhost", "TACO ORDER", "Corn Carnitas: corn, carnitas, lettuce, tomatoes, cheddar");
+
         };
     }
 

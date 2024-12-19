@@ -30,13 +30,15 @@ logging:
     tacocloud: DEBUG
 tacocloud:
   api:
-    url: http://localhost:8080/orders/fromEmail
+    url: http://localhost:8081/api/orders/fromEmail
   email:
-    host:
-    mailbox:
-    password:
-    poll-rate:
-    username:
+    host: localhost:3143
+    mailbox: INBOX
+    password: password
+    poll-rate: 10000
+    username: to
+server:
+  port: 8081
 ---
 spring:
   config:

@@ -59,9 +59,9 @@ public class OrderApiController {
     }
 
     @PostMapping(path = "/fromEmail", consumes = "application/json")
-    public EmailOrder postOrderKafka(@RequestBody EmailOrder order) {
+    public EmailOrder fromEmail(@RequestBody EmailOrder order) {
         //TODO Save incoming order in database
-        log.info(order.toString());
+        log.info("FROM EMAIL --- ",order.toString());
         return order;
     }
 
