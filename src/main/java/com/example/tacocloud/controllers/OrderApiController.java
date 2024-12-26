@@ -61,7 +61,7 @@ public class OrderApiController {
     @PostMapping(path = "/fromEmail", consumes = "application/json")
     public EmailOrder fromEmail(@RequestBody EmailOrder order) {
         //TODO Save incoming order in database
-        log.info("FROM EMAIL --- ",order.toString());
+        log.info("FROM EMAIL --- ", order.toString());
         return order;
     }
 
