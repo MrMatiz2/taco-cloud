@@ -39,6 +39,23 @@ tacocloud:
     username: to
 server:
   port: 8081
+management:
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: '*'
+        exclude: threaddump,heapdump
+  endpoint:
+    health:
+      show-details: always
+  info:
+    git:
+      mode: full
+info:
+  contact:
+    email: alejandromatiz87@gmail.com
+    phone: 3205053453
 ---
 spring:
   config:

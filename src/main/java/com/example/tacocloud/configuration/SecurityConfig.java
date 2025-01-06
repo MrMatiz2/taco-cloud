@@ -2,6 +2,7 @@ package com.example.tacocloud.configuration;
 
 import com.example.tacocloud.repositories.UsersRepository;
 import com.example.tacoclouddomain.entities.Users;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -36,6 +37,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/ingredients").hasAuthority("SCOPE_writeIngredients")
                         .requestMatchers(HttpMethod.DELETE, "/api/ingredients").hasAuthority("SCOPE_deleteIngredients")
                         .requestMatchers("/", "/**").access(new WebExpressionAuthorizationManager("permitAll()"))
+                        //.requestMatchers(EndpointRequest.toAnyEndpoint().excluding("health", "info")).hasRole("ADMIN") //Actuator security
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -54,12 +56,6 @@ public class SecurityConfig {
             if (user != null) return user;
             throw new UsernameNotFoundException("User not found");
         };
-    }
-
-    //DEV only
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers(new AntPathRequestMatcher("/h2-console/**"));
     }
 
     /* @Bean
