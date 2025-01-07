@@ -22,6 +22,12 @@ spring:
     producer:
       keySerializer: org.springframework.kafka.support.serializer.JsonSerializer
       valueSerializer: org.springframework.kafka.support.serializer.JsonSerializer
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090
+        instance:
+          management-base-url: http://localhost:8081
 taco:
   orders:
     pageSize: 5
