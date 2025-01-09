@@ -28,6 +28,8 @@ spring:
         url: http://localhost:9090
         instance:
           management-base-url: http://localhost:8081
+  jmx:
+    enabled: true
 taco:
   orders:
     pageSize: 5
